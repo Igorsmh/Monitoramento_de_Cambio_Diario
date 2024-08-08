@@ -1,6 +1,8 @@
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.common.exceptions import *
 from selenium.webdriver.common.by import By
 from time import sleep
 import os
@@ -19,7 +21,8 @@ def init_driver():
     --disable-notifications # Desabilita notificações
     --disable-gpu # Desabilita renderização com GPU
     '''
-    arguments = ['--lang=pt-BR', '--window-size=1200,1000', '--incognito']
+    arguments = ['--lang=pt-BR', '--window-size=1200,1000', '--incognito','--ignore-ssl-errors',
+                '--ignore-certificate-errors', '--disable-logging' ]
     for argument in arguments:
         chrome_options.add_argument(argument)
     # Lista de opções experimentais(nem todas estão documentadas) https://chromium.googlesource.com/chromium/src/+/master/chrome/common/pref_names.cc
@@ -39,4 +42,19 @@ def init_driver():
     })
     # inicializando o webdriver
     driver = webdriver.Chrome(options=chrome_options)
-    return driver
+
+    wait = WebDriverWait(
+        driver,
+        10,
+        poll_frequency=1,
+        #https://selenium-python.readthedocs.io/api.html#module-selenium.common.exceptions
+        ignored_exceptions=[
+            NoSuchElementException,
+            ElementNotVisibleException,
+            ElementNotSelectableException,
+        ])
+
+
+
+
+    return driver , wait
