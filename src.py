@@ -4,6 +4,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import *
 from selenium.webdriver.common.by import By
+from docx import Document
+from docx.shared import Cm
 from time import sleep
 import os
 
@@ -58,3 +60,27 @@ def init_driver():
 
 
     return driver , wait
+
+
+
+def criar_word(cotacao,data,site, imagem):
+
+    documento = Document()
+
+    # Titulo do documento
+    documento.add_heading(f'Cotação Atual do Dólar – {cotacao} {data}', 0).bold = True
+
+    # Texto 1 do documento
+    documento.add_paragraph(f'''O dólar está no valor de {cotacao}, na data {data}.\n
+    Valor cotado no site {site}\n
+    Print da cotação atual:
+    ''')
+
+    # Print site
+    documento.add_picture(imagem, width=Cm(20))
+
+    # Texto 2 do documento
+    documento.add_paragraph('Cotação feita por - Igor Mussalem')
+
+    # Salva o documento
+    documento.save('Cotação do Dolar.docx')
