@@ -109,3 +109,8 @@ def print_site():
     driver, _= init_driver()
     driver.save_screenshot('cotacao.jpg')
     return 'cotacao.jpg'
+
+def abrir_site(site_escolhido):
+
+    driver,_= init_driver()
+    driver.get(site_escolhido)
