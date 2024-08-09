@@ -103,3 +103,9 @@ def coletar_data():
     data = driver.find_elements(By.XPATH, "//td[@class='Py(10px) Ta(start) Pend(10px)']")
     data_text = data[0].text
     return data_text
+
+def print_site():
+
+    driver, _= init_driver()
+    driver.save_screenshot('cotacao.jpg')
+    return 'cotacao.jpg'
