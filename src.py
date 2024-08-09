@@ -93,3 +93,10 @@ def coletar_dolar():
     driver, _ = init_driver()
     cotacao = driver.find_elements(By.XPATH, "//td[@class='Py(10px) Pstart(10px)']")
     cotacao_text = cotacao[3].text
+
+
+def coletar_data():
+    
+    driver, _ = init_driver()
+    data = driver.find_elements(By.XPATH, "//td[@class='Py(10px) Ta(start) Pend(10px)']")
+    data_text = data[0].text
