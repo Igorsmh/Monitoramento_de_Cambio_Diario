@@ -63,24 +63,27 @@ def init_driver():
 
 
 
-def criar_word(cotacao,data,site, imagem):
+def criar_word():
 
-    documento = Document()
+    doc = Document()
+    doc.save('Cotação do Dolar.docx')
+
+
+def escrever_word(cot,data,site, img, doc):
 
     # Titulo do documento
-    documento.add_heading(f'Cotação Atual do Dólar – {cotacao} {data}', 0).bold = True
+    doc.add_heading(f'Cotação Atual do Dólar – {cot} {data}', 0).bold = True
 
     # Texto 1 do documento
-    documento.add_paragraph(f'''O dólar está no valor de {cotacao}, na data {data}.\n
+    doc.add_paragraph(f'''O dólar está no valor de {cot}, na data {data}.\n
     Valor cotado no site {site}\n
     Print da cotação atual:
     ''')
 
-    # Print site
-    documento.add_picture(imagem, width=Cm(20))
+    doc.add_picture(img, width=Cm(20))
 
     # Texto 2 do documento
-    documento.add_paragraph('Cotação feita por - Igor Mussalem')
+    doc.add_paragraph('Cotação feita por - Igor Mussalem')
 
-    # Salva o documento
-    documento.save('Cotação do Dolar.docx')
+    doc.save('Cotação do Dolar.docx')
+
