@@ -87,3 +87,9 @@ def escrever_word(cot,data,site, img, doc):
 
     doc.save('Cotação do Dolar.docx')
 
+
+def coletar_dolar():
+
+    driver, _ = init_driver()
+    cotacao = driver.find_elements(By.XPATH, "//td[@class='Py(10px) Pstart(10px)']")
+    cotacao_text = cotacao[3].text
