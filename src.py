@@ -67,6 +67,7 @@ def criar_word():
 
     doc = Document()
     doc.save('Cotação do Dolar.docx')
+    return doc
 
 
 def escrever_word(cot,data,site, img, doc):
@@ -85,7 +86,7 @@ def escrever_word(cot,data,site, img, doc):
     # Texto 2 do documento
     doc.add_paragraph('Cotação feita por - Igor Mussalem')
 
-    doc.save('Cotação do Dolar.docx')
+    return doc.save('Cotação do Dolar.docx')
 
 
 def coletar_dolar():
@@ -93,6 +94,7 @@ def coletar_dolar():
     driver, _ = init_driver()
     cotacao = driver.find_elements(By.XPATH, "//td[@class='Py(10px) Pstart(10px)']")
     cotacao_text = cotacao[3].text
+    return cotacao_text
 
 
 def coletar_data():
@@ -100,3 +102,4 @@ def coletar_data():
     driver, _ = init_driver()
     data = driver.find_elements(By.XPATH, "//td[@class='Py(10px) Ta(start) Pend(10px)']")
     data_text = data[0].text
+    return data_text
