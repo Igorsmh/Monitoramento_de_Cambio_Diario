@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import *
+from selenium.webdriver.support import expected_conditions as condicao_esperada
 from selenium.webdriver.common.by import By
 from docx import Document
 from docx.shared import Cm
@@ -61,14 +62,11 @@ def init_driver():
 
     return driver , wait
 
-
-
 def criar_word():
 
     doc = Document()
     doc.save('Cotação do Dolar.docx')
     return doc
-
 
 def escrever_word(cot,data,site, img, doc):
 
@@ -88,14 +86,12 @@ def escrever_word(cot,data,site, img, doc):
 
     return doc.save('Cotação do Dolar.docx')
 
-
 def coletar_dolar():
 
     driver, _ = init_driver()
     cotacao = driver.find_elements(By.XPATH, "//td[@class='Py(10px) Pstart(10px)']")
     cotacao_text = cotacao[3].text
     return cotacao_text
-
 
 def coletar_data():
     
@@ -114,3 +110,9 @@ def abrir_site(site_escolhido):
 
     driver,_= init_driver()
     driver.get(site_escolhido)
+
+def clicar_historico():
+
+    _, wait = init_driver()
+    wait.until(condicao_esperada.element_to_be_clickable(
+    (By.XPATH,"//li[@data-test='HISTORICAL_DATA']"))).click()
