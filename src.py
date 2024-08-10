@@ -111,8 +111,13 @@ def abrir_site(site_escolhido):
     driver,_= init_driver()
     driver.get(site_escolhido)
 
-def clicar_historico():
+def clicar_dados_historicos():
 
     _, wait = init_driver()
     wait.until(condicao_esperada.element_to_be_clickable(
     (By.XPATH,"//li[@data-test='HISTORICAL_DATA']"))).click()
+
+def rolar_pag():
+
+    driver,_ = init_driver()
+    driver.execute_script("window.scrollTo(0, 500);")
