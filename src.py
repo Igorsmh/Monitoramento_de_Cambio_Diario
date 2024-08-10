@@ -117,7 +117,12 @@ def clicar_dados_historicos():
     wait.until(condicao_esperada.element_to_be_clickable(
     (By.XPATH,"//li[@data-test='HISTORICAL_DATA']"))).click()
 
-def rolar_pag():
+def descer_pagina():
 
     driver,_ = init_driver()
     driver.execute_script("window.scrollTo(0, 500);")
+
+def clicar_banner():
+    
+    driver, _ = init_driver()
+    driver.find_elements(By.XPATH, "//button[@name='agree']").click()
