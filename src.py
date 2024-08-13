@@ -116,13 +116,22 @@ def descer_pagina(driver):
 
     driver.execute_script("window.scrollTo(0, 500);")
 
-def clicar_banner(driver,wait):
-    
-    
-    banner = driver.find_element(By.ID, 'guce-inline-consent-iframe')
-    driver.switch_to.frame(banner)
+def encontrar_iframe(driver):
+
+    iframe = driver.find_element(By.ID, 'guce-inline-consent-iframe')
+    return iframe
+
+def mudar_janela(driver, iframe):
+
+    driver.switch_to.frame(iframe)
+
+def clicar_banner(wait):
+
     wait.until(condicao_esperada.element_to_be_clickable(
     (By.XPATH, "//button[@name='agree']"))).click()
+
+def fechar_janela(driver):
+
     driver.switch_to.default_content()
 
 
