@@ -86,43 +86,36 @@ def escrever_word(cot,data,site, img, doc):
 
     return doc.save('Cotação do Dolar.docx')
 
-def coletar_dolar():
+def coletar_dolar(driver):
 
-    driver, _ = init_driver()
     cotacao = driver.find_elements(By.XPATH, "//td[@class='Py(10px) Pstart(10px)']")
     cotacao_text = cotacao[3].text
     return cotacao_text
 
-def coletar_data():
+def coletar_data(driver):
     
-    driver, _ = init_driver()
     data = driver.find_elements(By.XPATH, "//td[@class='Py(10px) Ta(start) Pend(10px)']")
     data_text = data[0].text
     return data_text
 
-def print_site():
+def print_site(driver):
 
-    driver, _= init_driver()
     driver.save_screenshot('cotacao.jpg')
     return 'cotacao.jpg'
 
-def abrir_site(site_escolhido):
+def abrir_site(site_escolhido, driver):
 
-    driver,_= init_driver()
     driver.get(site_escolhido)
 
-def clicar_dados_historicos():
+def clicar_dados_historicos(wait):
 
-    _, wait = init_driver()
     wait.until(condicao_esperada.element_to_be_clickable(
     (By.XPATH,"//li[@data-test='HISTORICAL_DATA']"))).click()
 
-def descer_pagina():
+def descer_pagina(driver):
 
-    driver,_ = init_driver()
     driver.execute_script("window.scrollTo(0, 500);")
 
-def clicar_banner():
+def clicar_banner(driver):
     
-    driver, _ = init_driver()
     driver.find_elements(By.XPATH, "//button[@name='agree']").click()
