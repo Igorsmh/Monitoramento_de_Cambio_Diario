@@ -71,7 +71,8 @@ def criar_word():
 def escrever_word(cot,data,site, img, doc):
 
     # Titulo do documento
-    doc.add_heading(f'Cotação Atual do Dólar – {cot} {data}', 0).bold = True
+
+    doc.add_heading(f'Cotação Atual do Dólar – {cot} ({data})', 0).bold = True
 
     # Texto 1 do documento
     doc.add_paragraph(f'''O dólar está no valor de {cot}, na data {data}.\n
@@ -79,7 +80,7 @@ def escrever_word(cot,data,site, img, doc):
     Print da cotação atual:
     ''')
 
-    doc.add_picture(img, width=Cm(20))
+    doc.add_picture(img, width=Cm(15))
 
     # Texto 2 do documento
     doc.add_paragraph('Cotação feita por - Igor Mussalem')
@@ -134,4 +135,10 @@ def fechar_janela(driver):
 
     driver.switch_to.default_content()
 
+def ajustar_cotacao(driver):
 
+    cot = coletar_dolar(driver)
+    cot = cot.replace(',', '.')
+    cot_num = float(cot)
+    cot_num = round(cot_num,2)
+    return cot_num
